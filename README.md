@@ -4,7 +4,7 @@ This README would normally document whatever steps are necessary to get your app
 
 ### What is this repository for? ###
 
-* Quick summary
+* Quick summary: a repository to store the source code for a GUI that visualises the impact of three selection indices in multiple traits.
 * Version
 * [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
 

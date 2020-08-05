@@ -6,7 +6,7 @@ library(shinyBS)
 
 # Default User Inputs ----
 # Number of default traits
-ntraits = 5
+ntraits = 2
 # Genetic variance
 Gi = 0.1*diag(ntraits) + 0.9 
 # Error variance
@@ -36,7 +36,19 @@ ui <- fluidPage(title = "Selection Indices Comparison",
                     # Add tooltip with instructions/info
                     bsTooltip("control_num", "Use the slider to increase or decrease the number of traits to compare",
                               "right", "hover", NULL),
-                    
+                    # Set economic weights to traits
+                    tags$h4("Economic weights"),
+                    matrixInput(
+                      "sampleW",
+                      value = wi,
+                      rows = list(
+                        extend = FALSE
+                      ),
+                      cols = list(
+                        names = FALSE
+                      ),
+                      class = "numeric"
+                    ),
                     # Set population size 
                     numericInput("npop", "Set the size of the population:",
                                  min = 10, max = 1000, value = 100, step = 1), 
@@ -62,18 +74,6 @@ ui <- fluidPage(title = "Selection Indices Comparison",
                     matrixInput(
                       "sampleE",
                       value = Ei,
-                      rows = list(
-                        extend = FALSE
-                      ),
-                      cols = list(
-                        names = FALSE
-                      ),
-                      class = "numeric"
-                    ),
-                    tags$h4("Economic weights"),
-                    matrixInput(
-                      "sampleW",
-                      value = wi,
                       rows = list(
                         extend = FALSE
                       ),
@@ -234,6 +234,12 @@ server <- function(input, output, clientData, session) {
       g_smith_mean=data$g_smith_mean 
 
     
+    # TODO: plot all pairs of traits = (t^2-t)/2  
+    # nr = (input$control_num^2-input$control_num)/2  
+    # print(nr)
+    # op = par(mfrow=c(nr,3)) 
+    #  for (i in 1:nr){
+       
     op = par(mfrow=c(1,3))
     # Base index
     plot(p,
